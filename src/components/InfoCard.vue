@@ -63,7 +63,10 @@ watchEffect(async () => {
   }
 });
 
-async function callCurrentWeatherAPI(lat: number, lon: number): Promise<any> {
+async function callCurrentWeatherAPI(
+  lat: number,
+  lon: number
+): Promise<WeatherData> {
   let result = await getWeather(lat, lon);
   if (Array.isArray(result)) {
     result = result[0];
