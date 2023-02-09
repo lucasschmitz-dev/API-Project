@@ -9,11 +9,10 @@
     />
 
     <div class="wrapper">
-      <CardGreeting msg="You did it!" />
+      <CardBase msg="API Beispieltool" description="zur Wetteranalyse" />
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/">Startseite</RouterLink>
       </nav>
     </div>
   </header>
@@ -23,7 +22,7 @@
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
-import CardGreeting from "./components/CardGreeting.vue";
+import CardBase from "./components/CardBase.vue";
 </script>
 
 <style scoped>

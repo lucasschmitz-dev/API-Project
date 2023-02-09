@@ -1,6 +1,6 @@
 import Axios from "axios";
 import _ from "lodash";
-import { baseUrl, parseResponse } from "@/services/http.utils";
+import { parseResponse } from "@/services/http.utils";
 import type { ParseFunction } from "@/services/http.utils";
 
 export function get<T>(
@@ -87,11 +87,6 @@ export async function doRequest<T>(
 ): Promise<T | Array<T>> {
   // eslint-disable-next-line prefer-const
   let { url, headers, parseFn } = options;
-
-  if (!url.startsWith("/")) {
-    url = "/" + url;
-  }
-  url = baseUrl + url;
 
   if (_.isNil(headers)) {
     headers = {};
