@@ -9,6 +9,7 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+import { store } from "./services/store";
 
 const vuetify = createVuetify({
   theme: {
@@ -21,6 +22,7 @@ const vuetify = createVuetify({
 const app = createApp(App);
 
 app.use(router);
+app.use(store);
 app.use(vuetify);
 
 app.mount("#app");

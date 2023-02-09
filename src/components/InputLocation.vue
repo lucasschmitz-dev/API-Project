@@ -15,8 +15,12 @@
 </template>
 
 <script setup lang="ts">
+import type { LocationData } from "@/model/Location.model";
 import { getLocationByName } from "@/services/api/geocoding.service";
 import { ref } from "vue";
+import { useStore } from "vuex";
+
+let store = useStore();
 
 let city = ref("");
 let rules = [
@@ -29,18 +33,21 @@ let rules = [
 async function submit(event: any) {
   const result = await event;
   if (result.valid === true) {
-    callGeocodingAPI(city.value);
+    let geoCodingResult = await callGeocodingAPI(city.value);
+    if (geoCodingResult !== undefined) {
+      store.commit("changeLocation", geoCodingResult);
+    }
   }
 }
 
-async function callGeocodingAPI(city: string) {
+async function callGeocodingAPI(city: string): Promise<LocationData> {
   let result = await getLocationByName(city, 1);
   if (Array.isArray(result)) {
     result = result[0];
   }
-  console.log(result);
   if (result === undefined || result === null) {
     alert("Es wurde keine Stadt mit dem Namen" + city + " gefunden!");
   }
+  return result;
 }
 </script>

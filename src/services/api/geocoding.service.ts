@@ -12,8 +12,8 @@ export async function getLocationByName(
   limit: number
 ): Promise<LocationData> {
   const location = await httpService.get(
-    `${fullURL}?q=${city}&limit=${limit}&appid=${APIkey}`, // give data into this as params!!! Change !!!!!!!!!!
-    null,
+    `${fullURL}`,
+    { q: city, limit: limit, appid: APIkey },
     parseLocation
   );
   return location as LocationData;
