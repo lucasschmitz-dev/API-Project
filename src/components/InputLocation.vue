@@ -46,7 +46,7 @@ async function callGeocodingAPI(city: string): Promise<LocationData> {
     result = result[0];
   }
   if (result === undefined || result === null) {
-    alert("Es wurde keine Stadt mit dem Namen" + city + " gefunden!");
+    alert("Es wurde keine Stadt mit dem Namen " + city + " gefunden!");
   }
   return result;
 }
