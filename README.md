@@ -1,9 +1,4 @@
-# Schiffe versenken
-
-<details>
-    <summary>Click me for a frontend guide</summary>
-
-# frontend
+# API Projekt
 
 This fronend is build with VueJS, Vite and TypeScript
 
