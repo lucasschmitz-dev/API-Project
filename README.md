@@ -49,4 +49,13 @@ npm run build
 npm run lint
 ```
 
+### Docker
+
+```sh
+docker build -t vuejs-app .
+```
+```sh
+docker run -d --name vuejs-1 -p 80:80 vuejs-app
+```
+
 </details>
