@@ -58,4 +58,12 @@ docker build -t vuejs-app .
 docker run -d --name vuejs-1 -p 80:80 vuejs-app
 ```
 
+Deploy:
+```sh
+docker tag vuejs-app lucasschmitz/private
+```
+```sh
+docker push lucasschmitz/private
+```
+
 </details>
