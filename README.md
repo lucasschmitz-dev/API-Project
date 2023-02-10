@@ -2,6 +2,10 @@
 
 This fronend is build with VueJS, Vite and TypeScript
 
+## API Keys
+
+To get working API Keys, you need to create a .env file based on .env.preset and put in your personal API Keys
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).

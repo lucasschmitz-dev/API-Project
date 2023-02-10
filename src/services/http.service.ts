@@ -1,4 +1,4 @@
-import Axios from "axios";
+import Axios, { AxiosError } from "axios";
 import _ from "lodash";
 import { parseResponse } from "@/services/http.utils";
 import type { ParseFunction } from "@/services/http.utils";
@@ -63,13 +63,20 @@ export async function doRequest<T>(
     headers: headers,
     params: options.params,
     data: options.body,
+  }).catch((err: AxiosError) => {
+    if (err.response?.status === 401) {
+      alert(err.response?.statusText + ", API Keys überprüfen!");
+    } else if (err.response?.status === 400) {
+      alert(err.response?.statusText + ", API Request überprüfen!");
+    } else {
+      alert(err.code);
+    }
   });
 
-  const parsedResponse = parseResponse(response.data, parseFn);
+  const parsedResponse = parseResponse(response?.data, parseFn);
   if (parsedResponse === null) {
     throw new Error("Empty response body");
   }
-
   return parsedResponse;
 }
 

@@ -4,7 +4,7 @@ import httpService from "@/services/http.service";
 const parseImage = (s: any) => new ImageData(s.data);
 
 const fullURL = "https://api.openai.com/v1/images/generations";
-const APIkey = "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"; // https://platform.openai.com/account/api-keys
+const APIkey = import.meta.env.VITE_OPENAI_API_KEY; // https://platform.openai.com/account/api-keys
 
 const headers: { [headerfield: string]: string } = {
   Authorization: "Bearer " + APIkey,
