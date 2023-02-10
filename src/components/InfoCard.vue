@@ -39,7 +39,6 @@
 <script setup lang="ts">
 import type { LocationData } from "@/model/Location.model";
 import type { WeatherData } from "@/model/Weather.model";
-import { getWeather } from "@/services/api/weather.service";
 import { ref, watchEffect } from "vue";
 import { useStore } from "vuex";
 
@@ -58,24 +57,15 @@ watchEffect(async () => {
   const data = store.getters.getLocation;
   if (data.name !== undefined) {
     location.value = data;
-    weather.value = await callCurrentWeatherAPI(data.lat, data.lon);
-    console.log(weather.value);
   }
 });
 
-async function callCurrentWeatherAPI(
-  lat: number,
-  lon: number
-): Promise<WeatherData> {
-  let result = await getWeather(lat, lon);
-  if (Array.isArray(result)) {
-    result = result[0];
+watchEffect(async () => {
+  const data = store.getters.getWeather;
+  if (data.name !== undefined) {
+    weather.value = data;
   }
-  if (result === undefined || result === null) {
-    alert("Fehler bei der Wettersuche!");
-  }
-  return result;
-}
+});
 </script>
 
 <style scoped>

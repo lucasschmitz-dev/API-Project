@@ -15,10 +15,18 @@
 </template>
 
 <script setup lang="ts">
+import type { ImageData } from "@/model/ImageB64.model";
 import type { LocationData } from "@/model/Location.model";
+import type { WeatherData } from "@/model/Weather.model";
 import { getLocationByName } from "@/services/api/geocoding.service";
+import { createImage } from "@/services/api/textToImage.service";
+import { getWeather } from "@/services/api/weather.service";
 import { ref } from "vue";
 import { useStore } from "vuex";
+
+const emit = defineEmits<{
+  (e: "loading", value: boolean): void;
+}>();
 
 let store = useStore();
 
@@ -34,8 +42,30 @@ async function submit(event: any) {
   const result = await event;
   if (result.valid === true) {
     let geoCodingResult = await callGeocodingAPI(city.value);
-    if (geoCodingResult !== undefined) {
+    if (geoCodingResult === undefined) {
+      return;
+    }
+    let weatherResult = await callCurrentWeatherAPI(
+      geoCodingResult.lat,
+      geoCodingResult.lon
+    );
+    if (weatherResult === undefined) {
+      return;
+    }
+    if (geoCodingResult !== undefined && weatherResult !== undefined) {
       store.commit("changeLocation", geoCodingResult);
+      store.commit("changeWeather", weatherResult);
+    }
+    let promt = [
+      geoCodingResult.country,
+      geoCodingResult.name,
+      weatherResult.weather[0].description,
+    ].join(" ");
+    emit("loading", true);
+    let imageResult = await callCreateImageAPI(promt);
+    emit("loading", false);
+    if (imageResult !== undefined) {
+      store.commit("changeImage", imageResult);
     }
   }
 }
@@ -47,6 +77,31 @@ async function callGeocodingAPI(city: string): Promise<LocationData> {
   }
   if (result === undefined || result === null) {
     alert("Es wurde keine Stadt mit dem Namen " + city + " gefunden!");
+  }
+  return result;
+}
+
+async function callCurrentWeatherAPI(
+  lat: number,
+  lon: number
+): Promise<WeatherData> {
+  let result = await getWeather(lat, lon);
+  if (Array.isArray(result)) {
+    result = result[0];
+  }
+  if (result === undefined || result === null) {
+    alert("Fehler bei der Wettersuche!");
+  }
+  return result;
+}
+
+async function callCreateImageAPI(promt: string): Promise<ImageData> {
+  let result = await createImage(promt);
+  if (Array.isArray(result)) {
+    result = result[0];
+  }
+  if (result === undefined || result === null) {
+    alert("Fehler bei der Erstellung des Bildes!");
   }
   return result;
 }

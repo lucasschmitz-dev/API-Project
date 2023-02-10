@@ -20,6 +20,7 @@ export function get<T>(
 export function post<T>(
   url: string,
   body: any,
+  headers?: any,
   parseFn?: ParseFunction<T>
 ): Promise<T | Array<T>> {
   return doRequest({
@@ -27,55 +28,14 @@ export function post<T>(
     method: "POST",
     useToken: true,
     body: body,
-    parseFn: parseFn,
-  });
-}
-
-export function put<T>(
-  url: string,
-  body: any,
-  parseFn?: ParseFunction<T>
-): Promise<T | Array<T>> {
-  return doRequest({
-    url,
-    method: "PUT",
-    useToken: true,
-    body: body,
-    parseFn: parseFn,
-  });
-}
-
-export function del<T>(
-  url: string,
-  body?: any,
-  parseFn?: ParseFunction<T>
-): Promise<T | Array<T>> {
-  return doRequest({
-    url,
-    method: "DELETE",
-    useToken: true,
-    body: body,
-    parseFn: parseFn,
-  });
-}
-
-export function pat<T>(
-  url: string,
-  body: any,
-  parseFn?: ParseFunction<T>
-): Promise<T | Array<T>> {
-  return doRequest({
-    url,
-    method: "PATCH",
-    useToken: true,
-    body: body,
+    headers: headers,
     parseFn: parseFn,
   });
 }
 
 interface RequestOptions<T> {
   url: string;
-  method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+  method: "GET" | "POST";
   useToken: boolean;
   headers?: { [headerfield: string]: string };
   params?: any;
@@ -116,8 +76,5 @@ export async function doRequest<T>(
 export default {
   get,
   post,
-  put,
-  del,
-  pat,
   doRequest,
 };
