@@ -51,16 +51,28 @@ npm run lint
 
 ### Docker
 
+Build:
+
 ```sh
-docker build -t lucasschmitz/vuejs-api-demo .
-```
-```sh
-docker run -d --name vuejs-api-demo-1 -p 80:80 lucasschmitz/vuejs-api-demo
+docker build -t lucasschmitz/vuejs-api-demo:latest .
 ```
 
 Deploy:
+
 ```sh
 docker push lucasschmitz/vuejs-api-demo:latest
+```
+
+Run:
+
+```sh
+docker run -d --name vuejs-api-demo-1 -p 80:80 index.docker.io/lucasschmitz/vuejs-api-demo:latest
+```
+
+Watchtower:
+
+```sh
+docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -v /home/lucasschmitz/.docker/config.json:/config.json containrrr/watchtower
 ```
 
 </details>
