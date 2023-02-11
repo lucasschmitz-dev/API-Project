@@ -52,18 +52,15 @@ npm run lint
 ### Docker
 
 ```sh
-docker build -t vuejs-app .
+docker build -t lucasschmitz/vuejs-api-demo .
 ```
 ```sh
-docker run -d --name vuejs-1 -p 80:80 vuejs-app
+docker run -d --name vuejs-api-demo-1 -p 80:80 lucasschmitz/vuejs-api-demo
 ```
 
 Deploy:
 ```sh
-docker tag vuejs-app lucasschmitz/private
-```
-```sh
-docker push lucasschmitz/private
+docker push lucasschmitz/vuejs-api-demo:latest
 ```
 
 </details>
