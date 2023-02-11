@@ -72,7 +72,7 @@ docker run -d --name vuejs-api-demo-1 -p 80:80 index.docker.io/lucasschmitz/vuej
 Watchtower:
 
 ```sh
-docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -v /home/lucasschmitz/.docker/config.json:/config.json containrrr/watchtower
+docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -v /home/lucasschmitz/.docker/config.json:/config.json containrrr/watchtower --interval 300
 ```
 
 </details>
