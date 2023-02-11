@@ -56,6 +56,9 @@ function checkLoading(e: boolean) {
 .image {
   height: 500px;
   width: 500px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .content {
@@ -77,6 +80,10 @@ function checkLoading(e: boolean) {
     display: flex;
     align-items: center;
     gap: 80px;
+  }
+
+  .image {
+    margin-top: 0;
   }
 }
 </style>
