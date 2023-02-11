@@ -9,7 +9,7 @@
     />
 
     <div class="wrapper">
-      <CardBase msg="API Tool" description="zur Wetteranalyse" />
+      <CardBase msg="API Beispieltool" description="zur Wetterdarstelllung" />
 
       <nav>
         <RouterLink to="/">Startseite</RouterLink>
