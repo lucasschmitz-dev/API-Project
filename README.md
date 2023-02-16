@@ -63,16 +63,22 @@ Deploy:
 docker push lucasschmitz/vuejs-api-demo:latest
 ```
 
-Run:
-
-```sh
-docker run -d --name vuejs-api-demo-1 -p 80:80 index.docker.io/lucasschmitz/vuejs-api-demo:latest
-```
-
 Watchtower:
 
 ```sh
 docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock -v /home/lucasschmitz/.docker/config.json:/config.json containrrr/watchtower --interval 300
 ```
 
+Run VueJS on server:
+
+```sh
+docker-compose -f /home/lucasschmitz/docker-compose-vuejsapi.yml up -d
+```
+
+Renew Certificates on server:
+```sh
+docker-compose -f /home/lucasschmitz/docker-compose-certbot.yml up
+docker-compose exec vuejs-api-demo-1 nginx -s reload
+```
 </details>
+
