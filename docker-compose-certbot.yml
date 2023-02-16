@@ -6,4 +6,4 @@ services:
     volumes:
       - /data/certbot/letsencrypt:/etc/letsencrypt
       - /data/certbot/www:/tmp/letsencrypt
-    command: certonly --webroot -w /tmp/letsencrypt --email mrlucas.schmitz@aol.de -d schmitz.berlin -d www.schmitz.berlin --agree-tos --verbose --keep-until-expiring --preferred-challenges=http
+    command: certonly --webroot -w /tmp/letsencrypt --email mrlucas.schmitz@aol.de -d schmitz.berlin -d www.schmitz.berlin --agree-tos --verbose --keep-until-expiring --preferred-challenges=http --cert-name schmitz.berlin
