@@ -18,7 +18,7 @@
         :size="128"
         :width="6"
       ></v-progress-circular>
-      <div v-if="loadingState === undefined" class="content">
+      <div v-if="loadingState === undefined" class="text-content">
         Stadt eingeben, um ein Bild generieren zu lassen.
       </div>
     </div>
@@ -61,6 +61,15 @@ function checkLoading(e: boolean) {
   margin-right: auto;
 }
 
+.text-content {
+  height: 500px;
+  width: 500px;
+  font-size: 20px;
+  line-height: 500px;
+  text-align: center;
+  word-break: normal;
+}
+
 .content {
   height: 500px;
   width: 500px;
@@ -74,7 +83,7 @@ function checkLoading(e: boolean) {
   line-height: 500px;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1330px) {
   .home {
     min-height: 100vh;
     display: flex;

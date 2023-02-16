@@ -4,7 +4,7 @@ import httpService from "@/services/http.service";
 const parseLocation = (s: any) =>
   new LocationData(s.country, s.name, s.lat, s.lon);
 
-const fullURL = "http://api.openweathermap.org/geo/1.0/direct";
+const fullURL = "https://api.openweathermap.org/geo/1.0/direct";
 const APIkey = import.meta.env.VITE_OPENWEATHERMAP_API_KEY; // https://home.openweathermap.org/api_keys
 
 export async function getLocationByName(
