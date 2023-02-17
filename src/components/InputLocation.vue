@@ -7,7 +7,13 @@
         label="Stadt"
         hint="Bitte Stadt mit vollem Namen eingeben"
       ></v-text-field>
-      <v-btn type="submit" block class="mt-2" style="color: #00bd7e"
+      <v-btn
+        :loading="loading"
+        :disabled="loading"
+        type="submit"
+        block
+        class="mt-2"
+        style="color: #00bd7e"
         >Bestätigen</v-btn
       >
     </v-form>
@@ -30,7 +36,8 @@ const emit = defineEmits<{
 
 let store = useStore();
 
-let city = ref("");
+let loading = ref<boolean>(false);
+let city = ref<string>("");
 let rules = [
   (value: string) => {
     if (value) return true;
@@ -41,6 +48,7 @@ let rules = [
 async function submit(event: any) {
   const result = await event;
   if (result.valid === true) {
+    loading.value = true;
     let geoCodingResult = await callGeocodingAPI(city.value);
     if (geoCodingResult === undefined) {
       return;
@@ -67,6 +75,7 @@ async function submit(event: any) {
     if (imageResult !== undefined) {
       store.commit("changeImage", imageResult);
     }
+    loading.value = false;
   }
 }
 
