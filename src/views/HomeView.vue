@@ -54,25 +54,25 @@ function checkLoading(e: boolean) {
 
 <style>
 .image {
-  height: 500px;
-  width: 500px;
+  height: 430px;
+  width: 430px;
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .text-content {
-  height: 500px;
-  width: 500px;
-  font-size: 20px;
-  line-height: 500px;
+  height: 430px;
+  width: 430px;
+  font-size: 18px;
+  line-height: 430px;
   text-align: center;
   word-break: normal;
 }
 
 .content {
-  height: 500px;
-  width: 500px;
+  height: 430px;
+  width: 430px;
   position: absolute;
   left: 50%;
   top: 50%;
@@ -80,7 +80,7 @@ function checkLoading(e: boolean) {
   transform: translate(-50%, -50%);
   text-align: center;
   vertical-align: middle;
-  line-height: 500px;
+  line-height: 430px;
 }
 
 @media (min-width: 1330px) {

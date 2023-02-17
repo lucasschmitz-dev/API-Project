@@ -13,6 +13,7 @@
 
       <nav>
         <RouterLink to="/">Startseite</RouterLink>
+        <a href="https://github.com/lucasschmitz-dev/API-Project">GitHub</a>
       </nav>
     </div>
   </header>
@@ -38,13 +39,13 @@ header {
 
 nav {
   width: 100%;
-  font-size: 12px;
+  font-size: 1rem;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: hsla(160, 100%, 37%, 1);
 }
 
 nav a.router-link-exact-active:hover {
@@ -52,6 +53,7 @@ nav a.router-link-exact-active:hover {
 }
 
 nav a {
+  color: var(--color-text);
   display: inline-block;
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
