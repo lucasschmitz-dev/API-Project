@@ -51,6 +51,7 @@ async function submit(event: any) {
     loading.value = true;
     let geoCodingResult = await callGeocodingAPI(city.value);
     if (geoCodingResult === undefined) {
+      loading.value = false;
       return;
     }
     let weatherResult = await callCurrentWeatherAPI(
@@ -58,6 +59,7 @@ async function submit(event: any) {
       geoCodingResult.lon
     );
     if (weatherResult === undefined) {
+      loading.value = false;
       return;
     }
     if (geoCodingResult !== undefined && weatherResult !== undefined) {
