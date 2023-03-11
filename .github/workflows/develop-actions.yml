@@ -11,4 +11,6 @@ jobs:
 
       - name: "test node"
         run: node --version
+
+      - name: "test npm"
         run: npm --version
