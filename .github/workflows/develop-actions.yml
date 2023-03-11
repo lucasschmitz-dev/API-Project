@@ -1,9 +1,7 @@
 name: Develop
 
 on: 
-  push:
-
-  workflow_dispatch:
+  push
 
 jobs:
   lint:
