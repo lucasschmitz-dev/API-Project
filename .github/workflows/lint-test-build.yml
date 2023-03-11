@@ -57,7 +57,7 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > .env
       
       - name: "build application"
-        run: npm run build
+        run: npm run build-only
 
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
