@@ -39,6 +39,7 @@ jobs:
 
   build:
     runs-on: [self-hosted]
+    needs: [lint, test]
     steps:
       - name: "checkout repository"
         uses: actions/checkout@v3
