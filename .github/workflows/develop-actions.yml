@@ -13,9 +13,20 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
+      
+      - name: "install dependencies"
+        uses: bahmutov/npm-install@v1
 
-      - name: "test node"
-        run: node --version
+  test:
+    runs-on: [self-hosted]
+    steps:
+      - name: "checkout repository"
+        uses: actions/checkout@v3
 
-      - name: "test npm"
-        run: npm --version
+      - name: "setup node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      
+      - name: "install dependencies"
+        uses: bahmutov/npm-install@v1
