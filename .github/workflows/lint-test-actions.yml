@@ -1,6 +1,6 @@
 name: Lint-Test
 
-on: workflow_dispatch 
+on: push
 
 jobs:
   lint:
@@ -57,7 +57,5 @@ jobs:
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: dist-without-markdown
-          path: |
-            dist
-            !dist/**/*.md
+          name: save dist
+          path: dist
