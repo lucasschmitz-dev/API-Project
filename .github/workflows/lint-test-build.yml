@@ -58,5 +58,6 @@ jobs:
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: save dist
+          name: BuildWebApp
           path: dist
+          retention-days: 14
