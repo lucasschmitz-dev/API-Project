@@ -1,9 +1,9 @@
-name: Lint-Test
+name: Lint-Test-Build
 
 on: push
 
 jobs:
-  lint:
+  Lint:
     runs-on: [self-hosted]
     steps:
       - name: "checkout repository"
@@ -20,7 +20,7 @@ jobs:
       - name: "linting"
         run: "echo 'linting...'"
 
-  test:
+  Test:
     runs-on: [self-hosted]
     steps:
       - name: "checkout repository"
@@ -37,9 +37,9 @@ jobs:
       - name: "testing"
         run: "echo 'testing...'"
 
-  build:
+  Build:
     runs-on: [self-hosted]
-    needs: [lint, test]
+    needs: [Lint, Test]
     steps:
       - name: "checkout repository"
         uses: actions/checkout@v3
