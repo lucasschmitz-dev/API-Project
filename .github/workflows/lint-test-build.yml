@@ -52,6 +52,10 @@ jobs:
       - name: "install dependencies"
         uses: bahmutov/npm-install@v1
       
+      - name: 'create env file for API keys'
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
+      
       - name: "build application"
         run: npm run build
 
