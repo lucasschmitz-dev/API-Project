@@ -16,6 +16,9 @@ jobs:
       
       - name: "install dependencies"
         uses: bahmutov/npm-install@v1
+      
+      - name: "linting"
+        run: "echo 'linting...'"
 
   test:
     runs-on: [self-hosted]
@@ -30,3 +33,6 @@ jobs:
       
       - name: "install dependencies"
         uses: bahmutov/npm-install@v1
+      
+      - name: "testing"
+        run: "echo 'testing...'"
