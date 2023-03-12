@@ -43,7 +43,14 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > .env
       
       - name: "testing"
-        run: "echo 'testing...'"
+        run: npm run cy:run
+
+      - name: Archive code coverage artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: CodeCoverage
+          path: reports
+          retention-days: 14
 
   Build:
     runs-on: [self-hosted]
