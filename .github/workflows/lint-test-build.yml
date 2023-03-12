@@ -6,6 +6,9 @@ jobs:
   Lint:
     runs-on: [self-hosted]
     steps:
+      - name: "checkout repository"
+        uses: actions/checkout@v3
+
       - uses: ./.github/actions/setup
       
       - name: "linting"
