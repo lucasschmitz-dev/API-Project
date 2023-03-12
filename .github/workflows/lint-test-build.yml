@@ -42,16 +42,15 @@ jobs:
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
       
-      - name: "start server"
+      - name: "run cypress tests"
         uses: cypress-io/github-action@v5
         with:
           install: false
           start: npm run dev
           wait-on: "http://localhost:8080"
           wait-on-timeout: 110
-      
-      - name: "testing"
-        run: npm run cy:run
+          config-file: cypress.config.ts
+          command: npm run cy:run
 
       - name: Archive code coverage artifacts
         uses: actions/upload-artifact@v3
