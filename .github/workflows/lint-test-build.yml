@@ -6,7 +6,7 @@ jobs:
   Lint:
     runs-on: [self-hosted]
     steps:
-      - uses: ./.github/actions/setup.yml
+      - uses: ./.github/actions/setup
       
       - name: "linting"
         run: npm run lint
