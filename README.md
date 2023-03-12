@@ -37,6 +37,18 @@ npm install
 npm run dev
 ```
 
+### Open Cypress and Hot-Reload for Development
+
+```sh
+npm run cy:open
+```
+
+### Run Cypress Tests
+
+```sh
+npm run cy:run
+```
+
 ### Type-Check, Compile and Minify for Production
 
 ```sh
