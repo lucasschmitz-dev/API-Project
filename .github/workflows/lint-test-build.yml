@@ -43,7 +43,7 @@ jobs:
           echo "${{ secrets.ENV_FILE }}" > .env
       
       - name: "start server"
-        run: npm run dev
+        run: npm run dev & wait-on http://localhost:8080
       
       - name: "testing"
         run: npm run cy:run
