@@ -41,5 +41,9 @@
     "vite": "^4.0.0",
     "vite-plugin-istanbul": "^4.0.1",
     "vue-tsc": "^1.0.12"
+  },
+  "nyc": {
+    "report-dir": "reports/coverage",
+    "temp-dir": "reports/.nyc_output"
   }
 }
