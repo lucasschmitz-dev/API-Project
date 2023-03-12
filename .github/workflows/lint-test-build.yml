@@ -45,7 +45,7 @@ jobs:
       - name: "start server"
         uses: cypress-io/github-action@v5
         with:
-          install-command:
+          install: false
           start: npm run dev
           wait-on: "http://localhost:8080"
           wait-on-timeout: 110
