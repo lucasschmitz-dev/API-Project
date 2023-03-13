@@ -177,8 +177,7 @@ Nest is [MIT licensed](LICENSE).
 ## Start MySQL Server
 
 ```bash
-# you need to type in your desired password in this file!
-$ docker-compose -f docker-compose-mysql.yml up
+$ docker-compose -f docker-compose-mysql.yml up -d
 ```
 
 </details>
