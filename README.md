@@ -176,6 +176,9 @@ Nest is [MIT licensed](LICENSE).
 
 ## Start MySQL Server
 
-via docker-compose-mysql.yml
+```bash
+# unit tests
+$ docker-compose -f docker-compose-mysql.yml up
+```
 
 </details>
