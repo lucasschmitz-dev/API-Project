@@ -126,7 +126,7 @@ async function uploadDataToDataBase() {
     store.getters.getLocation.name,
     store.getters.getLocation.lat,
     store.getters.getLocation.lon,
-    "Hier soll das Bild hochgeladen werden!",
+    store.getters.getImage.data[0].b64_json,
     store.getters.getWeather.name,
     store.getters.getWeather.wind.speed,
     store.getters.getWeather.wind.gust,
@@ -139,13 +139,6 @@ async function uploadDataToDataBase() {
     store.getters.getWeather.weather[0].icon,
     new Date()
   );
-
-  console.log(data);
-
-  let result = await uploadWeatherData(data);
-  if (Array.isArray(result)) {
-    result = result[0];
-  }
-  console.log(result.statusCode);
+  uploadWeatherData(data);
 }
 </script>

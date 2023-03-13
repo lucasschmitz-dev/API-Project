@@ -32,7 +32,7 @@ export class Weatherdata {
   @IsNotEmpty()
   lon: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'longtext' })
   @IsString()
   @IsNotEmpty()
   imageData: string;
