@@ -1,55 +1,93 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  IsDateString,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 @Entity()
 export class Weatherdata {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsString()
+  @IsNotEmpty()
   country: string;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsString()
+  @IsNotEmpty()
   city: string;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsNumber()
+  @IsNotEmpty()
   lat: number;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsNumber()
+  @IsNotEmpty()
   lon: number;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsString()
+  @IsNotEmpty()
   imageData: string;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsString()
+  @IsNotEmpty()
   stationName: string;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsNumber()
+  @IsNotEmpty()
   windSpeed: number;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsOptional()
   windGust: number;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsNumber()
+  @IsNotEmpty()
   temp: number;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsNumber()
+  @IsOptional()
   feels_like: number;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsNumber()
+  @IsOptional()
   temp_min: number;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsNumber()
+  @IsOptional()
   temp_max: number;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsString()
+  @IsNotEmpty()
   weatherName: string;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsString()
+  @IsNotEmpty()
   weatherDescription: string;
 
-  @Column()
+  @Column({ nullable: true })
+  @IsString()
+  @IsOptional()
   weatherIcon: string;
 
-  @Column()
+  @Column({ nullable: false })
+  @IsDateString()
+  @IsNotEmpty()
   timeStamp: Date;
 }

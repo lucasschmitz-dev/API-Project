@@ -39,8 +39,8 @@ export class WeatherdataService {
     });
   }
 
-  async createWeatherdata(weatherdata: Weatherdata) {
-    this.weatherdataRepository.save(weatherdata);
+  async createWeatherdata(weatherdata: Weatherdata): Promise<Weatherdata> {
+    return await this.weatherdataRepository.save(weatherdata);
   }
 
   async deleteWeatherdata(weatherdata: Weatherdata) {
