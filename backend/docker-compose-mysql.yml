@@ -5,16 +5,11 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
       MYSQL_DATABASE: 'apiproject'
-      # Password for root access
-      MYSQL_ROOT_PASSWORD: 'PASSWORD!!!'
+      MYSQL_TCP_PORT: 3306
     ports:
-      # <Port exposed> : < MySQL Port running inside container>
       - '3306:3306'
-    expose:
-      # Opens port 3306 on the container
-      - '3306'
-      # Where our data will be persisted
     volumes:
-      - /data/mysql:/var/lib/mysql
+      - /data/mysql/data:/var/lib/mysql
     container_name: mysqldb
