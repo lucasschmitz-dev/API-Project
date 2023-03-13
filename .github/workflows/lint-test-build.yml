@@ -5,6 +5,9 @@ on: push
 jobs:
   Lint:
     runs-on: [self-hosted]
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: "checkout repository"
         uses: actions/checkout@v3
@@ -16,6 +19,8 @@ jobs:
       
       - name: "install dependencies"
         uses: bahmutov/npm-install@v1
+        with: 
+          working-directory: frontend
 
       - name: 'create env file for API keys'
         run: |
@@ -26,6 +31,9 @@ jobs:
 
   Test:
     runs-on: [self-hosted]
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: "checkout repository"
         uses: actions/checkout@v3
@@ -37,6 +45,8 @@ jobs:
       
       - name: "install dependencies"
         uses: bahmutov/npm-install@v1
+        with: 
+          working-directory: frontend
 
       - name: 'create env file for API keys'
         run: |
@@ -45,6 +55,7 @@ jobs:
       - name: "run cypress tests"
         uses: cypress-io/github-action@v5
         with:
+          working-directory: frontend
           install: false
           start: npm run dev
           wait-on: "http://localhost:8080"
@@ -54,14 +65,17 @@ jobs:
 
       - name: Archive code coverage artifacts
         uses: actions/upload-artifact@v3
-        with:
+        with: 
           name: CodeCoverage
-          path: reports
+          path: frontend/reports
           retention-days: 14
 
   Build:
     runs-on: [self-hosted]
     needs: [Lint, Test]
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: "checkout repository"
         uses: actions/checkout@v3
@@ -73,6 +87,8 @@ jobs:
       
       - name: "install dependencies"
         uses: bahmutov/npm-install@v1
+        with: 
+          working-directory: frontend
       
       - name: 'create env file for API keys'
         run: |
@@ -85,5 +101,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: BuildWebApp
-          path: dist
+          path: frontend/dist
           retention-days: 14

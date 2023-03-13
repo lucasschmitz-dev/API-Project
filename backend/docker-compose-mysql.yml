@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: 'apiproject'
+      MYSQL_TCP_PORT: 3306
+    ports:
+      - '3306:3306'
+    volumes:
+      - /data/mysql/data:/var/lib/mysql
+    container_name: mysqldb
