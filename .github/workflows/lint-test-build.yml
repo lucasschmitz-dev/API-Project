@@ -66,9 +66,8 @@ jobs:
       - name: Archive code coverage artifacts
         uses: actions/upload-artifact@v3
         with: 
-          working-directory: frontend
           name: CodeCoverage
-          path: reports
+          path: frontend/reports
           retention-days: 14
 
   Build:
@@ -101,7 +100,6 @@ jobs:
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
-          working-directory: frontend
           name: BuildWebApp
-          path: dist
+          path: frontend/dist
           retention-days: 14
