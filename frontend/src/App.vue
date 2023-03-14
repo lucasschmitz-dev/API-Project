@@ -13,6 +13,7 @@
 
       <nav>
         <RouterLink to="/">Startseite</RouterLink>
+        <RouterLink to="/data">Daten</RouterLink>
         <a href="https://github.com/lucasschmitz-dev/API-Project">GitHub</a>
       </nav>
     </div>

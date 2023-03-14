@@ -4,6 +4,9 @@ import router from "./router";
 
 import "./assets/main.css";
 
+import { aliases, mdi } from "vuetify/lib/iconsets/mdi";
+import "@mdi/font/css/materialdesignicons.css";
+
 // Vuetify
 import "vuetify/styles";
 import { createVuetify } from "vuetify";
@@ -17,6 +20,13 @@ const vuetify = createVuetify({
   },
   components,
   directives,
+  icons: {
+    defaultSet: "mdi",
+    aliases,
+    sets: {
+      mdi,
+    },
+  },
 });
 
 const app = createApp(App);
