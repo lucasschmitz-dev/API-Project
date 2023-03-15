@@ -21,6 +21,26 @@ export class WeatherdataController {
     return this.service.getWeatherdata(params.id);
   }
 
+  @Post('/like/:id')
+  likeImage(@Param() params) {
+    return this.service.likeImage(params.id, true);
+  }
+
+  @Post('/removelike/:id')
+  removelikeImage(@Param() params) {
+    return this.service.likeImage(params.id, false);
+  }
+
+  @Post('/dislike/:id')
+  dislikeImage(@Param() params) {
+    return this.service.dislikeImage(params.id, true);
+  }
+
+  @Post('/removedislike/:id')
+  removedislikeImage(@Param() params) {
+    return this.service.dislikeImage(params.id, false);
+  }
+
   @Post()
   create(@Body() weatherdata: Weatherdata) {
     return this.service.createWeatherdata(weatherdata);
