@@ -316,7 +316,7 @@ async function removedislike() {
   transform: translate(-50%, -50%);
 }
 
-::v-deep .v-responsive__content {
+:deep .v-responsive__content {
   position: static !important;
 }
 </style>
