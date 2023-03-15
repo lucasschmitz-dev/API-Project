@@ -180,4 +180,24 @@ Nest is [MIT licensed](LICENSE).
 $ docker-compose -f docker-compose-mysql.yml up -d
 ```
 
+### Docker
+
+Build:
+
+```sh
+docker build -t lucasschmitz/nestjs-api:latest .
+```
+
+Deploy:
+
+```sh
+docker push lucasschmitz/nestjs-api:latest
+```
+
+Start:
+
+```sh
+docker-compose -f docker-compose-backend.yml up -d
+```
+
 </details>
