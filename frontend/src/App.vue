@@ -9,7 +9,10 @@
     />
 
     <div class="wrapper">
-      <CardBase msg="API Beispieltool" description="zur Wetterdarstelllung" />
+      <CardBase
+        msg="API Beispieltool"
+        description="zur Wetterdarstelllung mittels KI"
+      />
 
       <nav>
         <RouterLink to="/">Startseite</RouterLink>
