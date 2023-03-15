@@ -36,6 +36,11 @@ let store = useStore();
 let image = ref<ImageData>();
 let loadingState = ref();
 
+const data = store.getters.getImage;
+if (data.data !== undefined) {
+  loadingState.value = false;
+}
+
 watchEffect(async () => {
   const data = store.getters.getImage;
   if (data.data !== undefined) {

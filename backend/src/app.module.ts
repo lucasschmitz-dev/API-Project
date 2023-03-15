@@ -9,10 +9,10 @@ import { WeatherdataModule } from './weatherdata/weatherdata.module';
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host: process.env.DATABASE_HOST || 'localhost',
       port: 3306,
       username: 'root',
-      password: process.env.DATABASE_PASSWORD,
+      password: process.env.DATABASE_PASSWORD || 'J6XQMAi9',
       database: 'apiproject',
       entities: [Weatherdata],
       synchronize: true,

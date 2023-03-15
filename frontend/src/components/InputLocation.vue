@@ -24,8 +24,10 @@
 import type { ImageData } from "@/model/ImageB64.model";
 import type { LocationData } from "@/model/Location.model";
 import type { WeatherData } from "@/model/Weather.model";
+import { Weatherdata } from "@/model/Weatherdata.model";
 import { getLocationByName } from "@/services/api/geocoding.service";
 import { createImage } from "@/services/api/textToImage.service";
+import { uploadWeatherData } from "@/services/api/weatherDataBackend.service";
 import { getWeather } from "@/services/api/weather.service";
 import { ref } from "vue";
 import { useStore } from "vuex";
@@ -76,6 +78,7 @@ async function submit(event: any) {
     emit("loading", false);
     if (imageResult !== undefined) {
       store.commit("changeImage", imageResult);
+      uploadDataToDataBase();
     }
     loading.value = false;
   }
@@ -115,5 +118,27 @@ async function callCreateImageAPI(promt: string): Promise<ImageData> {
     alert("Fehler bei der Erstellung des Bildes!");
   }
   return result;
+}
+
+async function uploadDataToDataBase() {
+  let data = new Weatherdata(
+    store.getters.getLocation.country,
+    store.getters.getLocation.name,
+    store.getters.getLocation.lat,
+    store.getters.getLocation.lon,
+    store.getters.getImage.data[0].b64_json,
+    store.getters.getWeather.name,
+    store.getters.getWeather.wind.speed,
+    store.getters.getWeather.wind.gust,
+    store.getters.getWeather.main.temp,
+    store.getters.getWeather.main.feels_like,
+    store.getters.getWeather.main.temp_min,
+    store.getters.getWeather.main.temp_max,
+    store.getters.getWeather.weather[0].main,
+    store.getters.getWeather.weather[0].description,
+    store.getters.getWeather.weather[0].icon,
+    new Date()
+  );
+  uploadWeatherData(data);
 }
 </script>

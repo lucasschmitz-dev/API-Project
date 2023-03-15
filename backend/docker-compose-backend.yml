@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  backend:
+    container_name: nestjs-api-1
+    image: index.docker.io/lucasschmitz/nestjs-api:latest
+    ports:
+      - "3000:3000"
+    volumes:
+        - /data/certbot/letsencrypt:/app/letsencrypt
+        - /data/certbot/www:/app/www/certbot

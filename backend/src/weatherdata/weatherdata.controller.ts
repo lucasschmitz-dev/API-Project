@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Get,
-  Put,
-  Delete,
-  Param,
-} from '@nestjs/common';
+import { Controller, Post, Body, Get, Delete, Param } from '@nestjs/common';
 import { WeatherdataService } from './weatherdata.service';
 import { Weatherdata } from './weatherdata.entity/weatherdata.entity';
 
@@ -19,9 +11,34 @@ export class WeatherdataController {
     return this.service.getAllWeatherdata();
   }
 
+  @Get('/ranked')
+  getImagesAndRank() {
+    return this.service.getWeatherdataRanked();
+  }
+
   @Get(':id')
   get(@Param() params) {
     return this.service.getWeatherdata(params.id);
+  }
+
+  @Post('/like/:id')
+  likeImage(@Param() params) {
+    return this.service.likeImage(params.id, true);
+  }
+
+  @Post('/removelike/:id')
+  removelikeImage(@Param() params) {
+    return this.service.likeImage(params.id, false);
+  }
+
+  @Post('/dislike/:id')
+  dislikeImage(@Param() params) {
+    return this.service.dislikeImage(params.id, true);
+  }
+
+  @Post('/removedislike/:id')
+  removedislikeImage(@Param() params) {
+    return this.service.dislikeImage(params.id, false);
   }
 
   @Post()

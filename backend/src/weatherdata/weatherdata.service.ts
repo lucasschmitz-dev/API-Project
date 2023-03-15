@@ -14,33 +14,50 @@ export class WeatherdataService {
     return await this.weatherdataRepository.find();
   }
 
-  async getWeatherdata(_id: number): Promise<Weatherdata[]> {
-    return await this.weatherdataRepository.find({
-      select: [
-        'id',
-        'country',
-        'city',
-        'lat',
-        'lon',
-        'imageData',
-        'stationName',
-        'windSpeed',
-        'windGust',
-        'temp',
-        'feels_like',
-        'temp_min',
-        'temp_max',
-        'weatherName',
-        'weatherDescription',
-        'weatherIcon',
-        'timeStamp',
-      ],
+  async getWeatherdata(_id: number): Promise<Weatherdata> {
+    return await this.weatherdataRepository.findOne({
       where: [{ id: _id }],
     });
   }
 
+  async getWeatherdataRanked(): Promise<Weatherdata[]> {
+    const result = await this.weatherdataRepository.find({
+      select: ['id', 'likes'],
+      order: {
+        likes: 'DESC',
+      },
+    });
+    return result;
+  }
+
   async createWeatherdata(weatherdata: Weatherdata): Promise<Weatherdata> {
     return await this.weatherdataRepository.save(weatherdata);
+  }
+
+  async likeImage(_id: number, add: boolean): Promise<boolean> {
+    const res = await this.weatherdataRepository.findOne({
+      where: [{ id: _id }],
+    });
+    if (add) {
+      res.likes++;
+    } else {
+      res.likes--;
+    }
+    await this.weatherdataRepository.save(res);
+    return true;
+  }
+
+  async dislikeImage(_id: number, add: boolean): Promise<boolean> {
+    const res = await this.weatherdataRepository.findOne({
+      where: [{ id: _id }],
+    });
+    if (add) {
+      res.dislikes++;
+    } else {
+      res.dislikes--;
+    }
+    await this.weatherdataRepository.save(res);
+    return true;
   }
 
   async deleteWeatherdata(weatherdata: Weatherdata) {

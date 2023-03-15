@@ -69,7 +69,7 @@ export async function doRequest<T>(
     } else if (err.response?.status === 400) {
       alert(err.response?.statusText + ", API Request überprüfen!");
     } else {
-      alert(err.code);
+      console.log(err);
     }
   });
 

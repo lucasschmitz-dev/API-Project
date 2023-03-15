@@ -32,7 +32,7 @@ export class Weatherdata {
   @IsNotEmpty()
   lon: number;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, type: 'longtext' })
   @IsString()
   @IsNotEmpty()
   imageData: string;
@@ -90,4 +90,14 @@ export class Weatherdata {
   @IsDateString()
   @IsNotEmpty()
   timeStamp: Date;
+
+  @Column({ nullable: true })
+  @IsNumber()
+  @IsOptional()
+  likes: number;
+
+  @Column({ nullable: true })
+  @IsNumber()
+  @IsOptional()
+  dislikes: number;
 }

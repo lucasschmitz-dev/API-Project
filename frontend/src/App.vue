@@ -9,10 +9,14 @@
     />
 
     <div class="wrapper">
-      <CardBase msg="API Beispieltool" description="zur Wetterdarstelllung" />
+      <CardBase
+        msg="API Beispieltool"
+        description="zur Wetterdarstelllung mittels KI"
+      />
 
       <nav>
         <RouterLink to="/">Startseite</RouterLink>
+        <RouterLink to="/data">Daten</RouterLink>
         <a href="https://github.com/lucasschmitz-dev/API-Project">GitHub</a>
       </nav>
     </div>
@@ -67,7 +71,7 @@ nav a:first-of-type {
   header {
     display: flex;
     place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    padding-right: calc(var(--section-gap) / 3);
   }
 
   .logo {
