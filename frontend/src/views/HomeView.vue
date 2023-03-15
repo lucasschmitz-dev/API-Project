@@ -49,7 +49,6 @@ watchEffect(async () => {
 });
 
 function checkLoading(e: boolean) {
-  console.log(e);
   if (e) {
     loadingState.value = true;
   } else {

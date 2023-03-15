@@ -64,7 +64,6 @@ onMounted(() => {
 watch(
   () => page.value,
   () => {
-    console.log(page.value);
     getWeatherDataRankedFromBackend();
   }
 );
@@ -76,7 +75,6 @@ async function getWeatherDataRankedFromBackend() {
 }
 
 function calcAmountOfPages() {
-  console.log(weatherDataRanked.value.length);
   amountOfPages.value = Math.ceil(weatherDataRanked.value.length / 9);
 }
 
@@ -88,7 +86,6 @@ function calcDisplayedData() {
       id: weatherDataRanked?.value[i + (page.value - 1) * 9]?.id,
     });
   }
-  console.log(displayedData.value[0]);
 }
 </script>
 
