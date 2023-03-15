@@ -1,6 +1,7 @@
 <template>
   <v-card class="cardFrame" :class="{ removeHover: weatherData === undefined }">
     <v-img
+      v-if="loadingState === false || loadingState === undefined"
       v-bind:src="'data:image/jpeg;base64,' + weatherData?.imageData"
       class="align-end"
       gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
@@ -19,6 +20,21 @@
         download
       ></v-btn>
       <v-card-title class="text-white">{{ weatherData?.city }}</v-card-title>
+    </v-img>
+
+    <v-img
+      v-if="loadingState === true"
+      v-bind:src="'data:image/jpeg;base64,'"
+      class="align-end"
+      gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+      aspect-ratio="1"
+      cover
+      @Click="openDialog()"
+    >
+      <v-progress-circular
+        class="loadingAnimation"
+        indeterminate
+      ></v-progress-circular>
     </v-img>
 
     <v-card-actions>
@@ -87,6 +103,7 @@ let weatherData = ref<Weatherdata>();
 let dialog = ref<boolean>(false);
 let isImageLiked = ref<boolean>(false);
 let isImageDisliked = ref<boolean>(false);
+let loadingState = ref<boolean>(true);
 
 const props = defineProps({
   id: {
@@ -115,6 +132,7 @@ watch(
   () => props.id,
   () => {
     if (props.id !== undefined) {
+      loadingState.value = true;
       getWeatherData(props.id);
     } else {
       weatherData.value = undefined;
@@ -196,6 +214,7 @@ async function getWeatherData(rank: number) {
   ) {
     weatherData.value.dislikes = 0;
   }
+  loadingState.value = false;
 }
 
 function openDialog() {
@@ -288,5 +307,16 @@ async function removedislike() {
 
 .removeHover {
   pointer-events: none !important;
+}
+
+.loadingAnimation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+::v-deep .v-responsive__content {
+  position: static !important;
 }
 </style>

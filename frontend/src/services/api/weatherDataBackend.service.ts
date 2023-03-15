@@ -31,8 +31,6 @@ const baseUrl: string = prod
 
 const fullURL = baseUrl + "/weatherdata";
 
-console.log(fullURL);
-
 export async function uploadWeatherData(
   inpoutWeatherdata: Weatherdata
 ): Promise<any> {

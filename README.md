@@ -182,6 +182,8 @@ $ docker-compose -f docker-compose-mysql.yml up -d
 
 ### Docker
 
+Add env file containing password and host for production!
+
 Build:
 
 ```sh
