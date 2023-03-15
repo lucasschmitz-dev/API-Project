@@ -240,6 +240,7 @@ async function like() {
     alert("Fehler bei der ID!");
     return;
   }
+  isImageLiked.value = true;
   let result = await likeImage(weatherData.value.id);
   if (result) {
     store.state.likedImages.push(weatherData.value.id);
@@ -255,6 +256,7 @@ async function removelike() {
     alert("Fehler bei der ID!");
     return;
   }
+  isImageLiked.value = false;
   let result = await removelikeImage(weatherData.value.id);
   if (result) {
     const index = store.state.likedImages.indexOf(weatherData.value.id);
