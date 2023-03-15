@@ -3,35 +3,35 @@
     <v-container fluid fill-height>
       <v-row dense>
         <v-col :cols="4">
-          <CardImageFrame :rank="1"></CardImageFrame>
+          <CardImageFrame :id="weatherDataRanked[0]?.id"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame :rank="2"></CardImageFrame>
+          <CardImageFrame :id="weatherDataRanked[1]?.id"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame :rank="3"></CardImageFrame>
-        </v-col>
-      </v-row>
-      <v-row dense>
-        <v-col :cols="4">
-          <CardImageFrame :rank="4"></CardImageFrame>
-        </v-col>
-        <v-col :cols="4">
-          <CardImageFrame :rank="5"></CardImageFrame>
-        </v-col>
-        <v-col :cols="4">
-          <CardImageFrame :rank="6"></CardImageFrame>
+          <CardImageFrame :id="weatherDataRanked[2]?.id"></CardImageFrame>
         </v-col>
       </v-row>
       <v-row dense>
         <v-col :cols="4">
-          <CardImageFrame :rank="7"></CardImageFrame>
+          <CardImageFrame :id="weatherDataRanked[3]?.id"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame :rank="8"></CardImageFrame>
+          <CardImageFrame :id="weatherDataRanked[4]?.id"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame :rank="9"></CardImageFrame>
+          <CardImageFrame :id="weatherDataRanked[5]?.id"></CardImageFrame>
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col :cols="4">
+          <CardImageFrame :id="weatherDataRanked[6]?.id"></CardImageFrame>
+        </v-col>
+        <v-col :cols="4">
+          <CardImageFrame :id="weatherDataRanked[7]?.id"></CardImageFrame>
+        </v-col>
+        <v-col :cols="4">
+          <CardImageFrame :id="weatherDataRanked[8]?.id"></CardImageFrame>
         </v-col>
       </v-row>
     </v-container>
@@ -40,6 +40,18 @@
 
 <script setup lang="ts">
 import CardImageFrame from "@/components/CardImageFrame.vue";
+import { getWeatherDataRanked } from "@/services/api/weatherDataBackend.service";
+import { onMounted, ref } from "vue";
+
+let weatherDataRanked = ref<{ id: number; likes: number }[]>([]);
+
+onMounted(() => {
+  getWeatherDataRankedFromBackend();
+});
+
+async function getWeatherDataRankedFromBackend() {
+  weatherDataRanked.value = await getWeatherDataRanked();
+}
 </script>
 
 <style scoped>

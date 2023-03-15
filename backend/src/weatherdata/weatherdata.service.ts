@@ -20,13 +20,14 @@ export class WeatherdataService {
     });
   }
 
-  async getWeatherdataOnRank(_rank: number): Promise<Weatherdata> {
+  async getWeatherdataRanked(): Promise<Weatherdata[]> {
     const result = await this.weatherdataRepository.find({
+      select: ['id', 'likes'],
       order: {
         likes: 'DESC',
       },
     });
-    return result[_rank - 1];
+    return result;
   }
 
   async createWeatherdata(weatherdata: Weatherdata): Promise<Weatherdata> {

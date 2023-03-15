@@ -11,9 +11,9 @@ export class WeatherdataController {
     return this.service.getAllWeatherdata();
   }
 
-  @Get('/rank/:rank')
-  getRanked(@Param() params) {
-    return this.service.getWeatherdataOnRank(params.rank);
+  @Get('/ranked')
+  getImagesAndRank() {
+    return this.service.getWeatherdataRanked();
   }
 
   @Get(':id')

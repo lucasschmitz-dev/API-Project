@@ -70,7 +70,7 @@ import { useStore } from "vuex";
 import type { ImageData } from "@/model/ImageB64.model";
 import {
   dislikeImage,
-  getWeatherDataAtRank,
+  getWeatherDataWithId,
   likeImage,
   removedislikeImage,
   removelikeImage,
@@ -78,6 +78,7 @@ import {
 import type { Weatherdata } from "@/model/Weatherdata.model";
 import ImageDialog from "./ImageDialog.vue";
 import { downloadImage } from "@/services/utils";
+import { watch } from "vue";
 
 let store = useStore();
 let image = ref<ImageData>();
@@ -87,9 +88,9 @@ let isImageLiked = ref<boolean>(false);
 let isImageDisliked = ref<boolean>(false);
 
 const props = defineProps({
-  rank: {
+  id: {
     type: Number,
-    required: true,
+    required: false,
   },
 });
 
@@ -104,8 +105,19 @@ onBeforeMount(() => {
 });
 
 onMounted(() => {
-  getWeatherData(props.rank);
+  if (props.id !== undefined) {
+    getWeatherData(props.id);
+  }
 });
+
+watch(
+  () => props.id,
+  () => {
+    if (props.id !== undefined) {
+      getWeatherData(props.id);
+    }
+  }
+);
 
 watchEffect(async () => {
   const data = store.getters.getImage;
@@ -161,7 +173,10 @@ function checkDisliked(data: any) {
 }
 
 async function getWeatherData(rank: number) {
-  let result = await getWeatherDataAtRank(rank);
+  if (props.id === undefined) {
+    return;
+  }
+  let result = await getWeatherDataWithId(rank);
   if (Array.isArray(result)) {
     result = result[0];
   }

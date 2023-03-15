@@ -33,13 +33,18 @@ export async function uploadWeatherData(
   return weatherdata;
 }
 
-export async function getWeatherDataAtRank(rank: number): Promise<Weatherdata> {
+export async function getWeatherDataWithId(id: number): Promise<Weatherdata> {
   const weatherdata = await httpService.get(
-    `${fullURL}/rank/${rank}`,
+    `${fullURL}/${id}`,
     {},
     parseWeatherData
   );
   return weatherdata as Weatherdata;
+}
+
+export async function getWeatherDataRanked(): Promise<any> {
+  const weatherdata = await httpService.get(`${fullURL}/ranked`);
+  return weatherdata;
 }
 
 export async function likeImage(id: number): Promise<boolean> {
