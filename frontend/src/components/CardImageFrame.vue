@@ -24,7 +24,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        size="x-small"
+        size="small"
         color="surface-variant"
         variant="text"
         prepend-icon="mdi-thumb-up"
