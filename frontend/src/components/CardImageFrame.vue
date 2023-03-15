@@ -1,5 +1,5 @@
 <template>
-  <v-card class="cardFrame">
+  <v-card class="cardFrame" :class="{ removeHover: weatherData === undefined }">
     <v-img
       v-bind:src="'data:image/jpeg;base64,' + weatherData?.imageData"
       class="align-end"
@@ -9,6 +9,7 @@
       @Click="openDialog()"
     >
       <v-btn
+        v-if="weatherData !== undefined"
         class="downloadIcon download"
         size="small"
         color="surface-variant"
@@ -24,7 +25,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        v-if="isImageLiked === false"
+        v-if="isImageLiked === false && weatherData !== undefined"
         size="small"
         color="surface-variant"
         variant="text"
@@ -33,7 +34,7 @@
         >{{ weatherData?.likes }}</v-btn
       >
       <v-btn
-        v-if="isImageLiked === true"
+        v-if="isImageLiked === true && weatherData !== undefined"
         size="small"
         color="green"
         variant="text"
@@ -42,7 +43,7 @@
         >{{ weatherData?.likes }}</v-btn
       >
       <v-btn
-        v-if="isImageDisliked === false"
+        v-if="isImageDisliked === false && weatherData !== undefined"
         size="x-small"
         color="surface-variant"
         variant="text"
@@ -50,7 +51,7 @@
         @Click="dislike()"
       ></v-btn>
       <v-btn
-        v-if="isImageDisliked === true"
+        v-if="isImageDisliked === true && weatherData !== undefined"
         size="x-small"
         color="red"
         variant="text"
@@ -115,6 +116,8 @@ watch(
   () => {
     if (props.id !== undefined) {
       getWeatherData(props.id);
+    } else {
+      weatherData.value = undefined;
     }
   }
 );
@@ -281,5 +284,9 @@ async function removedislike() {
 .cardFrame:hover {
   cursor: pointer;
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.1);
+}
+
+.removeHover {
+  pointer-events: none !important;
 }
 </style>
