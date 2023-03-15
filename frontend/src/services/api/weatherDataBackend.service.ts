@@ -24,7 +24,14 @@ const parseWeatherData = (s: any) =>
     s.id
   );
 
-const fullURL = "http://localhost:3000/weatherdata";
+const prod = process.env.NODE_ENV === "production";
+const baseUrl: string = prod
+  ? "https://schmitz.berlin:3000"
+  : "http://127.0.0.1:3000";
+
+const fullURL = baseUrl + "/weatherdata";
+
+console.log(fullURL);
 
 export async function uploadWeatherData(
   inpoutWeatherdata: Weatherdata
