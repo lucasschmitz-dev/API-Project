@@ -9,6 +9,8 @@ export const store = createStore({
     location: {} as LocationData,
     weather: {} as WeatherData,
     image: {} as ImageData,
+    likedImages: [] as Number[],
+    dislikedImages: [] as Number[],
   },
   getters: {
     getLocation(state) {
@@ -19,6 +21,12 @@ export const store = createStore({
     },
     getImage(state) {
       return state.image;
+    },
+    getLikedImages(state) {
+      return state.likedImages;
+    },
+    getDislikedImages(state) {
+      return state.dislikedImages;
     },
   },
   mutations: {

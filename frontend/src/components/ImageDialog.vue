@@ -46,6 +46,10 @@
               <h3>{{ weatherData?.likes }}</h3>
             </div>
             <div class="inline">
+              <h3>Dislikes:</h3>
+              <h3>{{ weatherData?.dislikes }}</h3>
+            </div>
+            <div class="inline">
               <h3>Erstellt am:</h3>
               <h3>{{ timeStamp }}</h3>
             </div>

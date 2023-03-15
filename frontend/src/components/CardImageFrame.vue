@@ -24,18 +24,38 @@
       <v-spacer></v-spacer>
 
       <v-btn
+        v-if="isImageLiked === false"
         size="small"
         color="surface-variant"
         variant="text"
         prepend-icon="mdi-thumb-up"
+        @Click="like()"
         >{{ weatherData?.likes }}</v-btn
       >
-
       <v-btn
+        v-if="isImageLiked === true"
+        size="small"
+        color="green"
+        variant="text"
+        prepend-icon="mdi-thumb-up"
+        @Click="removelike()"
+        >{{ weatherData?.likes }}</v-btn
+      >
+      <v-btn
+        v-if="isImageDisliked === false"
         size="x-small"
         color="surface-variant"
         variant="text"
         icon="mdi-thumb-down"
+        @Click="dislike()"
+      ></v-btn>
+      <v-btn
+        v-if="isImageDisliked === true"
+        size="x-small"
+        color="red"
+        variant="text"
+        icon="mdi-thumb-down"
+        @Click="removedislike()"
       ></v-btn>
     </v-card-actions>
   </v-card>
@@ -45,10 +65,16 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watchEffect } from "vue";
+import { onBeforeMount, onMounted, ref, watchEffect } from "vue";
 import { useStore } from "vuex";
 import type { ImageData } from "@/model/ImageB64.model";
-import { getWeatherDataAtRank } from "@/services/api/weatherDataBackend.service";
+import {
+  dislikeImage,
+  getWeatherDataAtRank,
+  likeImage,
+  removedislikeImage,
+  removelikeImage,
+} from "@/services/api/weatherDataBackend.service";
 import type { Weatherdata } from "@/model/Weatherdata.model";
 import ImageDialog from "./ImageDialog.vue";
 import { downloadImage } from "@/services/utils";
@@ -57,12 +83,24 @@ let store = useStore();
 let image = ref<ImageData>();
 let weatherData = ref<Weatherdata>();
 let dialog = ref<boolean>(false);
+let isImageLiked = ref<boolean>(false);
+let isImageDisliked = ref<boolean>(false);
 
 const props = defineProps({
   rank: {
     type: Number,
     required: true,
   },
+});
+
+onBeforeMount(() => {
+  const data = store.getters.getImage;
+  checkLiked(data);
+});
+
+onBeforeMount(() => {
+  const data = store.getters.getImage;
+  checkDisliked(data);
 });
 
 onMounted(() => {
@@ -76,12 +114,70 @@ watchEffect(async () => {
   }
 });
 
+watchEffect(async () => {
+  const data = store.getters.getLikedImages;
+  checkLiked(data);
+});
+
+watchEffect(async () => {
+  const data = store.getters.getDislikedImages;
+  checkDisliked(data);
+});
+
+function checkLiked(data: any) {
+  if (weatherData.value?.id === undefined) {
+    return;
+  }
+  if (data.includes(weatherData.value.id)) {
+    if (
+      weatherData.value.likes === undefined ||
+      weatherData.value.likes === null
+    ) {
+      alert("Likes are undefined!");
+      return;
+    }
+    isImageLiked.value = true;
+  } else {
+    isImageLiked.value = false;
+  }
+}
+
+function checkDisliked(data: any) {
+  if (weatherData.value?.id === undefined) {
+    return;
+  }
+  if (data.includes(weatherData.value.id)) {
+    if (
+      weatherData.value.likes === undefined ||
+      weatherData.value.likes === null
+    ) {
+      alert("Likes are undefined!");
+      return;
+    }
+    isImageDisliked.value = true;
+  } else {
+    isImageDisliked.value = false;
+  }
+}
+
 async function getWeatherData(rank: number) {
   let result = await getWeatherDataAtRank(rank);
   if (Array.isArray(result)) {
     result = result[0];
   }
   weatherData.value = result;
+  if (
+    weatherData.value.likes === undefined ||
+    weatherData.value.likes === null
+  ) {
+    weatherData.value.likes = 0;
+  }
+  if (
+    weatherData.value.dislikes === undefined ||
+    weatherData.value.dislikes === null
+  ) {
+    weatherData.value.dislikes = 0;
+  }
 }
 
 function openDialog() {
@@ -97,6 +193,68 @@ function download(e: any) {
     return;
   }
   downloadImage(weatherData.value);
+}
+
+async function like() {
+  if (weatherData.value === undefined) {
+    return;
+  }
+  if (weatherData.value.id === undefined) {
+    alert("Fehler bei der ID!");
+    return;
+  }
+  let result = await likeImage(weatherData.value.id);
+  if (result) {
+    store.state.likedImages.push(weatherData.value.id);
+    weatherData.value.likes!++;
+  }
+}
+
+async function removelike() {
+  if (weatherData.value === undefined) {
+    return;
+  }
+  if (weatherData.value.id === undefined) {
+    alert("Fehler bei der ID!");
+    return;
+  }
+  let result = await removelikeImage(weatherData.value.id);
+  if (result) {
+    const index = store.state.likedImages.indexOf(weatherData.value.id);
+    store.state.likedImages.splice(index, 1);
+    weatherData.value.likes!--;
+  }
+}
+
+async function dislike() {
+  if (weatherData.value === undefined) {
+    return;
+  }
+  if (weatherData.value.id === undefined) {
+    alert("Fehler bei der ID!");
+    return;
+  }
+  let result = await dislikeImage(weatherData.value.id);
+  if (result) {
+    store.state.dislikedImages.push(weatherData.value.id);
+    weatherData.value.dislikes!++;
+  }
+}
+
+async function removedislike() {
+  if (weatherData.value === undefined) {
+    return;
+  }
+  if (weatherData.value.id === undefined) {
+    alert("Fehler bei der ID!");
+    return;
+  }
+  let result = await removedislikeImage(weatherData.value.id);
+  if (result) {
+    const index = store.state.dislikedImages.indexOf(weatherData.value.id);
+    store.state.dislikedImages.splice(index, 1);
+    weatherData.value.dislikes!--;
+  }
 }
 </script>
 

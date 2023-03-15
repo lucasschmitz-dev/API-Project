@@ -17,6 +17,7 @@ export class Weatherdata {
   timeStamp: Date;
   likes?: number;
   dislikes?: number;
+  id?: number;
 
   constructor(
     country: string,
@@ -36,7 +37,8 @@ export class Weatherdata {
     weatherIcon: string,
     timeStamp: Date,
     likes?: number,
-    dislikes?: number
+    dislikes?: number,
+    id?: number
   ) {
     this.country = country;
     this.city = city;
@@ -59,6 +61,9 @@ export class Weatherdata {
     }
     if (dislikes) {
       this.dislikes = dislikes;
+    }
+    if (id) {
+      this.id = id;
     }
   }
 }

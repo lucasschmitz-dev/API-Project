@@ -20,7 +20,8 @@ const parseWeatherData = (s: any) =>
     s.weatherIcon,
     s.timeStamp,
     s.likes,
-    s.dislikes
+    s.dislikes,
+    s.id
   );
 
 const fullURL = "http://localhost:3000/weatherdata";
@@ -39,4 +40,27 @@ export async function getWeatherDataAtRank(rank: number): Promise<Weatherdata> {
     parseWeatherData
   );
   return weatherdata as Weatherdata;
+}
+
+export async function likeImage(id: number): Promise<boolean> {
+  const weatherdata = await httpService.post(`${fullURL}/like/${id}`, {});
+  return weatherdata as boolean;
+}
+
+export async function removelikeImage(id: number): Promise<boolean> {
+  const weatherdata = await httpService.post(`${fullURL}/removelike/${id}`, {});
+  return weatherdata as boolean;
+}
+
+export async function dislikeImage(id: number): Promise<boolean> {
+  const weatherdata = await httpService.post(`${fullURL}/dislike/${id}`, {});
+  return weatherdata as boolean;
+}
+
+export async function removedislikeImage(id: number): Promise<boolean> {
+  const weatherdata = await httpService.post(
+    `${fullURL}/removedislike/${id}`,
+    {}
+  );
+  return weatherdata as boolean;
 }
