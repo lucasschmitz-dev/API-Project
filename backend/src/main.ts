@@ -9,6 +9,7 @@ async function bootstrap() {
     fs.existsSync('./letsencrypt/live/schmitz.berlin/privkey.pem') &&
     fs.existsSync('./letsencrypt/live/schmitz.berlin/fullchain.pem')
   ) {
+    console.log('starting with ssl certificate...');
     const httpsOptions = {
       key: fs.readFileSync('./letsencrypt/live/schmitz.berlin/privkey.pem'),
       cert: fs.readFileSync('./letsencrypt/live/schmitz.berlin/fullchain.pem'),
@@ -23,6 +24,7 @@ async function bootstrap() {
 
     await app.listen(3000);
   } else {
+    console.log('starting without ssl certificate...');
     const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(new ValidationPipe());
     app.enableCors();
