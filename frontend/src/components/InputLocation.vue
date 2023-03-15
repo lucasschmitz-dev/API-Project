@@ -27,7 +27,7 @@ import type { WeatherData } from "@/model/Weather.model";
 import { Weatherdata } from "@/model/Weatherdata.model";
 import { getLocationByName } from "@/services/api/geocoding.service";
 import { createImage } from "@/services/api/textToImage.service";
-import { uploadWeatherData } from "@/services/api/uploadWeatherData.service";
+import { uploadWeatherData } from "@/services/api/weatherDataBackend.service";
 import { getWeather } from "@/services/api/weather.service";
 import { ref } from "vue";
 import { useStore } from "vuex";

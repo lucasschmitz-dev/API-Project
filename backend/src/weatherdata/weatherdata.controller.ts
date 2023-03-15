@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Post,
-  Body,
-  Get,
-  Put,
-  Delete,
-  Param,
-} from '@nestjs/common';
+import { Controller, Post, Body, Get, Delete, Param } from '@nestjs/common';
 import { WeatherdataService } from './weatherdata.service';
 import { Weatherdata } from './weatherdata.entity/weatherdata.entity';
 
@@ -17,6 +9,11 @@ export class WeatherdataController {
   @Get('/all')
   getAll() {
     return this.service.getAllWeatherdata();
+  }
+
+  @Get('/rank/:rank')
+  getRanked(@Param() params) {
+    return this.service.getWeatherdataOnRank(params.rank);
   }
 
   @Get(':id')

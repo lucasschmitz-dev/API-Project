@@ -3,35 +3,35 @@
     <v-container fluid fill-height>
       <v-row dense>
         <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
+          <CardImageFrame :rank="1"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
+          <CardImageFrame :rank="2"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
-        </v-col>
-      </v-row>
-      <v-row dense>
-        <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
-        </v-col>
-        <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
-        </v-col>
-        <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
+          <CardImageFrame :rank="3"></CardImageFrame>
         </v-col>
       </v-row>
       <v-row dense>
         <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
+          <CardImageFrame :rank="4"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
+          <CardImageFrame :rank="5"></CardImageFrame>
         </v-col>
         <v-col :cols="4">
-          <CardImageFrame></CardImageFrame>
+          <CardImageFrame :rank="6"></CardImageFrame>
+        </v-col>
+      </v-row>
+      <v-row dense>
+        <v-col :cols="4">
+          <CardImageFrame :rank="7"></CardImageFrame>
+        </v-col>
+        <v-col :cols="4">
+          <CardImageFrame :rank="8"></CardImageFrame>
+        </v-col>
+        <v-col :cols="4">
+          <CardImageFrame :rank="9"></CardImageFrame>
         </v-col>
       </v-row>
     </v-container>

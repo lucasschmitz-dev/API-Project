@@ -90,4 +90,14 @@ export class Weatherdata {
   @IsDateString()
   @IsNotEmpty()
   timeStamp: Date;
+
+  @Column({ nullable: true })
+  @IsNumber()
+  @IsOptional()
+  likes: number;
+
+  @Column({ nullable: true })
+  @IsNumber()
+  @IsOptional()
+  dislikes: number;
 }
