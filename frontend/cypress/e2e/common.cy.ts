@@ -30,7 +30,7 @@ describe("Common Test", () => {
     cy.get("header")
       .find(".greetings")
       .find("h3")
-      .should("have.text", "zur Wetterdarstelllung");
+      .should("have.text", "zur Wetterdarstelllung mittels KI");
   });
 
   it("should dispaly text in specific color", () => {
