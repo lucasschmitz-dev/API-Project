@@ -80,7 +80,7 @@ jobs:
   Deploy:
     runs-on: [self-hosted]
     needs: [Build]
-    if: github.ref == 'refs/heads/master'
+    if: github.ref == 'refs/heads/main'
     defaults:
       run:
         working-directory: frontend
