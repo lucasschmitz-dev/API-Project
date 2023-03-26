@@ -7,13 +7,11 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version: 18
-      shell: bash
       
     - name: "install dependencies"
       uses: bahmutov/npm-install@v1
       with: 
         working-directory: frontend
-      shell: bash
 
     - name: 'create env file for API keys'
       run: |
