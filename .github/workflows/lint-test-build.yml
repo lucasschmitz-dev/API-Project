@@ -104,4 +104,4 @@ jobs:
         with:
           push: true
           tags: lucasschmitz/vuejs-api-demo:latest
-          file: {context}/frontend/Dockerfile
+          file: "frontend/Dockerfile"
