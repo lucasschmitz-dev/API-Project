@@ -79,7 +79,7 @@ jobs:
 
   Deploy:
     runs-on: [self-hosted]
-    needs: [Lint, Test, Build]
+    needs: [Build]
     if: github.ref == 'refs/heads/master'
     defaults:
       run:
