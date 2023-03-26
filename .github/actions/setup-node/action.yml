@@ -1,5 +1,11 @@
 name: Lint-Test-Build
 
+inputs:
+  api-secret-env:
+    required: true
+    description: "The secret api keys used to authenticate with weather and image api"
+
+
 runs:
   using: "composite"
   steps:
@@ -15,5 +21,5 @@ runs:
 
     - name: 'create env file for API keys'
       run: |
-        echo "${{ secrets.ENV_FILE }}" > .env
+        echo "${{ inputs.api-secret-env }}" > .env
       shell: bash
