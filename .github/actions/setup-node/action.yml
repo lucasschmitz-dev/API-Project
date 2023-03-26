@@ -1,0 +1,18 @@
+name: Lint-Test-Build
+
+runs:
+  using: "composite"
+  steps:
+    - name: "setup node"
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+      
+    - name: "install dependencies"
+      uses: bahmutov/npm-install@v1
+      with: 
+        working-directory: frontend
+
+    - name: 'create env file for API keys'
+      run: |
+        echo "${{ secrets.ENV_FILE }}" > .env
