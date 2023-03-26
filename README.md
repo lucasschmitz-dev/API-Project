@@ -69,7 +69,7 @@ npm run lint
 Build:
 
 ```sh
-docker build -t lucasschmitz/vuejs-api-demo:latest .
+docker build --file ./frontend/Dockerfile -t lucasschmitz/vuejs-api-demo:latest .
 ```
 
 Deploy:

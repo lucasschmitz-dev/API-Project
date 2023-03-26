@@ -9,23 +9,14 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - name: "checkout repository"
+      - name: "Checkout repository"
         uses: actions/checkout@v3
 
-      - name: "setup node"
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      
-      - name: "install dependencies"
-        uses: bahmutov/npm-install@v1
+      - name: "Setup node"
+        uses: ./.github/actions/setup-node
         with: 
-          working-directory: frontend
+          api-secret-env: ${{ secrets.ENV_FILE }}
 
-      - name: 'create env file for API keys'
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
-      
       - name: "linting"
         run: npm run lint
 
@@ -35,24 +26,15 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - name: "checkout repository"
+      - name: "Checkout repository"
         uses: actions/checkout@v3
 
-      - name: "setup node"
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      
-      - name: "install dependencies"
-        uses: bahmutov/npm-install@v1
+      - name: "Setup node"
+        uses: ./.github/actions/setup-node
         with: 
-          working-directory: frontend
-
-      - name: 'create env file for API keys'
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+          api-secret-env: ${{ secrets.ENV_FILE }}
       
-      - name: "run cypress tests"
+      - name: "Run cypress tests"
         uses: cypress-io/github-action@v5
         with:
           working-directory: frontend
@@ -77,24 +59,15 @@ jobs:
       run:
         working-directory: frontend
     steps:
-      - name: "checkout repository"
+      - name: "Checkout repository"
         uses: actions/checkout@v3
 
-      - name: "setup node"
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
-      
-      - name: "install dependencies"
-        uses: bahmutov/npm-install@v1
+      - name: "Setup node"
+        uses: ./.github/actions/setup-node
         with: 
-          working-directory: frontend
+          api-secret-env: ${{ secrets.ENV_FILE }}
       
-      - name: 'create env file for API keys'
-        run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
-      
-      - name: "build application"
+      - name: "Build application"
         run: npm run build-only
 
       - name: Archive build artifacts
@@ -103,3 +76,32 @@ jobs:
           name: BuildWebApp
           path: frontend/dist
           retention-days: 14
+
+  Deploy:
+    runs-on: [self-hosted]
+    needs: [Lint, Test, Build]
+    if: github.ref == 'refs/heads/master'
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+
+      - name: "Setup node"
+        uses: ./.github/actions/setup-node
+        with: 
+          api-secret-env: ${{ secrets.ENV_FILE }}
+
+      - name: "Login to Docker Hub"
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: "Build, Push and Deploy"
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: lucasschmitz/vuejs-api-demo:latest
+          file: "frontend/Dockerfile"
