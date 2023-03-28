@@ -97,3 +97,11 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      
+      - name: "Test Files"
+        run:  |
+          ls -la
+
+      - name: "Test env"
+        run:  |
+          cat .env
