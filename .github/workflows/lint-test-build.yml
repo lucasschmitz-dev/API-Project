@@ -88,7 +88,7 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v3
 
-      - name: 'create env file for API keys'
+      - name: "Create env file for API keys"
         run: |
           echo "${{ secrets.ENV_FILE }}" > .env
 
