@@ -1,6 +1,6 @@
 /* const { downloadFile } = require("cypress-downloadfile/lib/addPlugin");
  */
-describe("My First TEst", () => {
+describe("Input Test", () => {
   beforeEach(() => {
     cy.intercept("http://127.0.0.1:3000/weatherdata/ranked", [
       { id: 1, likes: null },
