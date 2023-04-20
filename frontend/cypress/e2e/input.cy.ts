@@ -1,7 +1,7 @@
 /* const { downloadFile } = require("cypress-downloadfile/lib/addPlugin");
  */
 describe("Input Test", () => {
-  it("Input Field", () => {
+  beforeEach(() => {
     cy.intercept("http://127.0.0.1:3000/weatherdata/ranked", [
       { id: 1, likes: null },
     ]);
@@ -9,8 +9,13 @@ describe("Input Test", () => {
       fixture: "weatherData.json",
     });
     cy.intercept("http://127.0.0.1:3000/weatherdata/like/1", "true");
+    cy.intercept("http://127.0.0.1:3000/weatherdata/removelike/1", "true");
     cy.intercept("http://127.0.0.1:3000/weatherdata/dislike/1", "true");
+    cy.intercept("http://127.0.0.1:3000/weatherdata/removedislike/1", "true");
     cy.visit("/");
+  });
+
+  it("Input Field", () => {
     const name = "Giraffen sind modisch 1";
     cy.get("#input-0").should("exist");
     cy.get("#input-0").type(name);
@@ -25,14 +30,6 @@ describe("Input Test", () => {
   // Input Feld überprüfen, schauen ob es , aber wo finde ich den Input Feld als Code?
   // und wie mache ich das bei einer Anzeige?
   it("thumbs up should be green when Image liked", () => {
-    cy.intercept("http://127.0.0.1:3000/weatherdata/ranked", [
-      { id: 1, likes: null },
-    ]);
-    cy.intercept("http://127.0.0.1:3000/weatherdata/1", {
-      fixture: "weatherData.json",
-    });
-    cy.intercept("http://127.0.0.1:3000/weatherdata/like/1", "true");
-    cy.intercept("http://127.0.0.1:3000/weatherdata/dislike/1", "true");
     cy.visit("/data");
     cy.get(".mdi-thumb-up")
       .should("exist")
@@ -47,14 +44,6 @@ describe("Input Test", () => {
   });
 
   it("thumbs down should be red when Image liked", () => {
-    cy.intercept("http://127.0.0.1:3000/weatherdata/ranked", [
-      { id: 1, likes: null },
-    ]);
-    cy.intercept("http://127.0.0.1:3000/weatherdata/1", {
-      fixture: "weatherData.json",
-    });
-    cy.intercept("http://127.0.0.1:3000/weatherdata/like/1", "true");
-    cy.intercept("http://127.0.0.1:3000/weatherdata/dislike/1", "true");
     cy.visit("/data");
     cy.get(".mdi-thumb-down")
       .should("exist")
