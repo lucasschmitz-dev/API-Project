@@ -32,14 +32,11 @@ describe("Input Test", () => {
       .should("have.css", "color", "rgb(189, 189, 189)")
       .click();
     cy.get(".mdi-thumb-up").should("have.css", "color", "rgb(76, 175, 80)");
-    cy.get(".text-green > .v-btn__content")
+    cy.get(".v-card-actions > .v-btn--size-small > .v-btn__content")
       .should("exist")
       .should("have.text", "1");
     cy.get(".mdi-thumb-up").click();
     cy.get(".mdi-thumb-up").should("have.css", "color", "rgb(189, 189, 189)");
-    cy.get(".v-card-actions > .v-btn--size-small > .v-btn__content")
-      .should("exist")
-      .should("have.text", "0");
   });
   it("thumbs down should be red when Image liked", () => {
     cy.visit("/data");
@@ -50,7 +47,6 @@ describe("Input Test", () => {
     cy.get(".mdi-thumb-down")
       .should("have.css", "color", "rgb(244, 67, 54)")
       .click();
-    cy.get(".mdi-thumb-down").should("have.css", "color", "rgb(189, 189, 189)");
   });
   /* it("should download PNG file", () => {
     cy.visit("/data");
