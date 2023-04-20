@@ -27,8 +27,7 @@ describe("Input Test", () => {
     });
   });
 
-  // Input Feld überprüfen, schauen ob es , aber wo finde ich den Input Feld als Code?
-  // und wie mache ich das bei einer Anzeige?
+  // Überprüfung der Like Funktion inklusive Counter der Anzahl
   it("thumbs up should be green when Image liked", () => {
     cy.visit("/data");
     cy.get(".mdi-thumb-up")
