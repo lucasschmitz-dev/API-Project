@@ -1,17 +1,6 @@
 /* const { downloadFile } = require("cypress-downloadfile/lib/addPlugin");
  */
 describe("Input Test", () => {
-  beforeEach(() => {
-    cy.intercept("http://127.0.0.1:3000/weatherdata/ranked", [
-      { id: 1, likes: null },
-    ]);
-    cy.intercept("http://127.0.0.1:3000/weatherdata/1", {
-      fixture: "weatherData.json",
-    });
-    cy.intercept("http://127.0.0.1:3000/weatherdata/like/1", "true");
-    cy.intercept("http://127.0.0.1:3000/weatherdata/dislike/1", "true");
-  });
-
   it("Input Field", () => {
     cy.intercept("http://127.0.0.1:3000/weatherdata/ranked", [
       { id: 1, likes: null },
