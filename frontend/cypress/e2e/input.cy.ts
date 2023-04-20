@@ -10,9 +10,10 @@ describe("Input Test", () => {
     });
     cy.intercept("http://127.0.0.1:3000/weatherdata/like/1", "true");
     cy.intercept("http://127.0.0.1:3000/weatherdata/dislike/1", "true");
-    cy.visit("/");
   });
+
   it("Input Field", () => {
+    cy.visit("/");
     const name = "Giraffen sind modisch 1";
     cy.get("#input-0").should("exist");
     cy.get("#input-0").type(name);
@@ -23,6 +24,7 @@ describe("Input Test", () => {
       );
     });
   });
+
   // Input Feld überprüfen, schauen ob es , aber wo finde ich den Input Feld als Code?
   // und wie mache ich das bei einer Anzeige?
   it("thumbs up should be green when Image liked", () => {
@@ -38,6 +40,7 @@ describe("Input Test", () => {
     cy.get(".mdi-thumb-up").click();
     cy.get(".mdi-thumb-up").should("have.css", "color", "rgb(189, 189, 189)");
   });
+
   it("thumbs down should be red when Image liked", () => {
     cy.visit("/data");
     cy.get(".mdi-thumb-down")
@@ -48,6 +51,7 @@ describe("Input Test", () => {
       .should("have.css", "color", "rgb(244, 67, 54)")
       .click();
   });
+
   /* it("should download PNG file", () => {
     cy.visit("/data");
     cy.get("INSERT download").click();
