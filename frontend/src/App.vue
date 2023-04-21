@@ -10,7 +10,7 @@
 
     <div class="wrapper">
       <CardBase
-        msg="API Beispieltool"
+        msg="API Tool"
         description="zur Wetterdarstelllung mittels KI"
       />
 

@@ -2,6 +2,7 @@
  */
 describe("Input Test", () => {
   beforeEach(() => {
+    cy.visit("/");
     cy.intercept("http://127.0.0.1:3000/weatherdata/ranked", [
       { id: 1, likes: null },
     ]);
@@ -12,7 +13,6 @@ describe("Input Test", () => {
     cy.intercept("http://127.0.0.1:3000/weatherdata/removelike/1", "true");
     cy.intercept("http://127.0.0.1:3000/weatherdata/dislike/1", "true");
     cy.intercept("http://127.0.0.1:3000/weatherdata/removedislike/1", "true");
-    cy.visit("/");
   });
 
   it("Input Field", () => {
