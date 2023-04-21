@@ -25,7 +25,7 @@ describe("Common Test", () => {
     cy.get("header")
       .find(".greetings")
       .find("h1")
-      .should("have.text", "API Beispieltool");
+      .should("have.text", "API Tool");
 
     cy.get("header")
       .find(".greetings")
